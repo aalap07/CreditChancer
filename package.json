@@ -1,0 +1,25 @@
+{
+  "name": "creditchancer",
+  "version": "1.0.0",
+  "description": "Crowdsourcing application allowing users to input their track records with credit and check their odds of being approved for new cards.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aalap07/CreditChancer.git"
+  },
+  "author": "Aalap Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aalap07/CreditChancer/issues"
+  },
+  "homepage": "https://github.com/aalap07/CreditChancer#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "mongojs": "^3.1.0"
+  }
+}
