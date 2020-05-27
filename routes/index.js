@@ -10,6 +10,7 @@ router.get("/", function (req, res, next) {
   
   MongoClient.connect(uri, { useNewUrlParser: true },  function (err, client) {
     try {
+      // Getting all raw values from db
       const collection = client.db("cards").collection("collection").find().toArray(function(err, vals) {
         // console.log(JSON.stringify(vals));
         res.json(vals);
