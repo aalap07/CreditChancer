@@ -6,13 +6,16 @@ var uri =
   "mongodb://aalap:u4ENIOWM41eZJbbK@prod-shard-00-00-kxv8d.mongodb.net:27017,prod-shard-00-01-kxv8d.mongodb.net:27017,prod-shard-00-02-kxv8d.mongodb.net:27017/cards?ssl=true&replicaSet=Prod-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 router.get("/", function (req, res, next) {
-  res.render("index.html");
+  // res.render("index.html");
   
   MongoClient.connect(uri, { useNewUrlParser: true },  function (err, client) {
     try {
-      const collection = client.db("cards").collection("collection");
+      const collection = client.db("cards").collection("collection").find().toArray(function(err, vals) {
+        // console.log(JSON.stringify(vals));
+        res.json(vals);
+    });
     } catch (err) {
-      console.error(err);
+      res.send(err);
     } finally {
       client.close();
     }
