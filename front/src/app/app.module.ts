@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { CardsComponent } from './cards/cards.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { CardsComponent } from './cards/cards.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
