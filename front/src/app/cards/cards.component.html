@@ -1,10 +1,33 @@
 <div class="container">
-    <div *ngFor = "let card of cards">
-        <div class = "col-md-3">
-            {{card.name}}
-        </div>
-        <div class = "col-md-3">
-            {{card.creditScore}}
-        </div>
+    <div class = "col-md-4">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                  <input type="button" value="Add card" class="btn btn-primary"/>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>FORM HERE</p>
+          </mat-expansion-panel>
     </div>
+    <div>
+    <br /><br />
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Card</th>
+          <th scope="col">Credit Score</th>
+          <th scope="col">Oldest Account Age (Yrs)</th>
+          <th scope="col">Oldest Account Age (Mos)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let card of cards">
+          <th scope="row">{{ card.name }}</th>
+          <td>{{ card.creditScore }}</td>
+          <td>{{ card.acctAgeYrs }}</td>
+          <td>{{ card.acctAgeMos }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -22,4 +22,17 @@ export class CardsComponent implements OnInit {
   ngOnInit() {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
   }
+
+  addCard(){
+    const newCard = {
+      name: this.name,
+      creditScore: this.creditScore,
+      acctAgeYrs: this.acctAgeYrs,
+      acctAgeMos: this.acctAgeMos
+    }
+    this.cardService.postCard(newCard)
+      .subscribe(card => {
+        this.cards.push(card);
+      });
+  }
 }
