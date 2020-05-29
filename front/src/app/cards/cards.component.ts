@@ -23,7 +23,7 @@ export class CardsComponent implements OnInit {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
   }
 
-  addCard(){
+  addCard() {
     const newCard = {
       name: this.name,
       creditScore: this.creditScore,

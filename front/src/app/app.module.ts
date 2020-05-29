@@ -7,6 +7,7 @@ import { CardsComponent } from "./cards/cards.component";
 import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, CardsComponent],
@@ -16,8 +17,9 @@ import { MatExpansionModule } from "@angular/material/expansion";
     CommonModule,
     NoopAnimationsModule,
     MatExpansionModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
