@@ -2,7 +2,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <input class="form-control" type="text" placeholder="Find a card" aria-label="Search">
+            <input class="form-control" type="text" [(ngModel)]="term" placeholder="Find a card" aria-label="Search">
+            <!-- <select id="cards-dropdown" name="cards-dropdown">
+            </select> -->
         </div>
         <div class="col-md-3">
             <mat-expansion-panel>
@@ -14,7 +16,7 @@
                 <form (submit)="addCard()">
                     <div class="form-group">
                         <label>Card Name</label>
-                        <input type="text" [(ngModel)]="name" name="name" class="form-control" required />
+                        <select [(ngModel)]="name" name="name" class="form-control" required></select>
                     </div>
                     <div class="form-group">
                         <label>Credit Score</label>
@@ -35,7 +37,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <div>
         <br /><br />
@@ -49,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let card of cards">
+                <tr *ngFor="let card of cards | filter: term">
                     <th scope="row">{{ card.name }}</th>
                     <td>{{ card.creditScore }}</td>
                     <td>{{ card.acctAgeYrs }}</td>

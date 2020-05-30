@@ -8,6 +8,7 @@ import { CommonModule } from "@angular/common";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { FormsModule } from "@angular/forms";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [AppComponent, CardsComponent],
@@ -17,7 +18,8 @@ import { FormsModule } from "@angular/forms";
     CommonModule,
     NoopAnimationsModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

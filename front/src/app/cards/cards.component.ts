@@ -10,6 +10,7 @@ import { Card } from "../card";
 })
 
 export class CardsComponent implements OnInit {
+  term: string;
   cards: Card[];
   card: Card;
   name: string;
