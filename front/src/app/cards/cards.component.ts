@@ -8,7 +8,6 @@ import { Card } from "../card";
   styleUrls: ["./cards.component.css"],
   providers: [CardService],
 })
-
 export class CardsComponent implements OnInit {
   term: string;
   cards: Card[];
@@ -20,11 +19,13 @@ export class CardsComponent implements OnInit {
   apiCards: String[];
   apiCard: string;
   apisearch: string;
-  curPage: number;
+  approvedPage: number;
+  addCardPage: number;
   pageSize: number;
 
   constructor(private cardService: CardService) {
-    this.curPage = 1;
+    this.approvedPage = 1;
+    this.addCardPage = 1;
     this.pageSize = 10;
   }
 
@@ -37,29 +38,38 @@ export class CardsComponent implements OnInit {
       name: cardName,
       creditScore: this.creditScore,
       acctAgeYrs: this.acctAgeYrs,
-      acctAgeMos: this.acctAgeMos
-    }
-    this.cardService.postCard(newCard)
-      .subscribe(card => this.cards.push(newCard));
+      acctAgeMos: this.acctAgeMos,
+    };
+    this.cardService
+      .postCard(newCard)
+      .subscribe((card) => this.cards.push(newCard));
   }
 
-  fetchApiCards(){
-    this.cardService.getApiCards(this.apisearch).subscribe(
-      (apiCards) => {
-        console.log(apiCards.results.length);
-
-        var filtered = new Array();
-        for(var i = 0; i < apiCards.results.length; i++){
-          console.log(apiCards.results[i].title);
-          filtered.push(apiCards.results[i].title);
-        }
-        this.apiCards = filtered;
-      });
-      return this.apiCards;
+  fetchApiCards() {
+    this.cardService.getApiCards(this.apisearch).subscribe((apiCards) => {
+      var filtered = new Array();
+      for (var i = 0; i < apiCards.results.length; i++) {
+        filtered.push(apiCards.results[i].title);
+      }
+      this.apiCards = filtered;
+    });
+    return this.apiCards;
   }
 
-  numberOfPages(){
+  numApprovedPages() {
     return Math.ceil(this.cards.length / this.pageSize);
-  };
+  }
 
+  numAddCardPages() {
+    return Math.ceil(this.apiCards.length / this.pageSize);
+  }
+
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+  }
 }

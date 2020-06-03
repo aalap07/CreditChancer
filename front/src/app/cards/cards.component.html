@@ -21,14 +21,15 @@
                                 under a minute
                             </p>
                             <div class="hero-cta">
-                                <a class="button button-primary" href="#records">Get started</a>
-                                <a class="button button-secondary" href="#contribute">Contribute</a>
+                                <button class="button button-primary" (click)="scrollToElement(records)">Get started</button>
+                                <button class="button button-secondary" (click)="scrollToElement(contribute)">Contribute</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <div class="container" id="records">
+            <hr>
+            <div #records class="container">
                 <h2>View approval data</h2>
                 <div class="row">
                     <div class="col-md">
@@ -50,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let card of cards | filter: term | slice: (curPage * pageSize) - pageSize :curPage * pageSize">
+                            <tr *ngFor="let card of cards | filter: term | slice: (approvedPage * pageSize) - pageSize :approvedPage * pageSize">
                                 <th scope="row">{{ card.name }}</th>
                                 <td>{{ card.creditScore }}</td>
                                 <td>{{ card.acctAgeYrs }}</td>
@@ -59,17 +60,17 @@
                         </tbody>
                     </table>
                     <div style="text-align: center;">
-                        <button style="margin:1%" class="btn btn-primary" [disabled] ="curPage == 1" (click)="curPage = curPage - 1"><</button>
-                        <span>Page {{curPage}} of {{ numberOfPages() }}</span>
-                        <button style="margin:1%" class="btn btn-primary" [disabled] = "curPage >= cards.length/pageSize" 
-                                 (click) ="curPage = curPage + 1">></button>
+                        <button style="margin:1%" class="btn btn-primary" [disabled] ="approvedPage == 1" (click)="approvedPage = approvedPage - 1"><</button>
+                        <span>Page {{approvedPage}} of {{ numApprovedPages() }}</span>
+                        <button style="margin:1%" class="btn btn-primary" [disabled] = "approvedPage >= cards.length/pageSize" 
+                                 (click) ="approvedPage = approvedPage + 1">></button>
                 </div>
                 </div>
             </div>
             <div class="container">
                 <h2>Chance me</h2>
             </div>
-            <div class="container" id="contribute">
+            <div #contribute class="container">
                 <h2>Add a data point</h2>
                 <div class="row">
                     <div class="col-md-8">
@@ -86,7 +87,7 @@
                     <h4>{{ apiCards.length }} result(s)</h4>
                     <table class="table">
                         <tbody>
-                            <tr *ngFor="let apicard of apiCards | slice: 0:11">
+                            <tr *ngFor="let apicard of apiCards | slice: (addCardPage * pageSize) - pageSize :addCardPage * pageSize">
                                 <mat-expansion-panel>
                                     <mat-expansion-panel-header>
                                         <label id="name">{{ apicard }}</label>
@@ -114,6 +115,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div style="text-align: center;">
+                        <button style="margin:1%" class="btn btn-primary" [disabled] ="addCardPage == 1" (click)="addCardPage = addCardPage - 1"><</button>
+                        <span>Page {{addCardPage}} of {{ numAddCardPages() }}</span>
+                        <button style="margin:1%" class="btn btn-primary" [disabled] = "addCardPage >= apiCards.length/pageSize" 
+                                 (click) ="addCardPage = addCardPage + 1">></button>
+                </div>
                 </div>
             </div>
             <div class="container-sm">
