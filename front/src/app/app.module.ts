@@ -1,6 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { HttpModule } from "@angular/http";
+import { HttpModule, Http } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from "./app.component";
 import { CardsComponent } from "./cards/cards.component";
@@ -19,7 +20,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NoopAnimationsModule,
     MatExpansionModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

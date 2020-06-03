@@ -17,11 +17,22 @@ export class CardsComponent implements OnInit {
   creditScore: number;
   acctAgeYrs: number;
   acctAgeMos: number;
+  apiCards: String[];
+  apiCard: string;
 
   constructor(private cardService: CardService) { }
 
   ngOnInit() {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
+    this.cardService.getApiCards().subscribe(
+      (apiCards) => {
+        var filtered = new Array();
+        for(var i = 0; i < apiCards.results.length; i++){
+          //console.log(apiCards.results[i].original_title);
+          filtered.push(apiCards.results[i].title);
+        }
+        this.apiCards = filtered;
+      });
   }
 
   addCard() {
