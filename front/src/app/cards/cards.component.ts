@@ -20,8 +20,13 @@ export class CardsComponent implements OnInit {
   apiCards: String[];
   apiCard: string;
   apisearch: string;
+  curPage: number;
+  pageSize: number;
 
-  constructor(private cardService: CardService) { }
+  constructor(private cardService: CardService) {
+    this.curPage = 1;
+    this.pageSize = 10;
+  }
 
   ngOnInit() {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
@@ -35,9 +40,7 @@ export class CardsComponent implements OnInit {
       acctAgeMos: this.acctAgeMos
     }
     this.cardService.postCard(newCard)
-      .subscribe(card => {
-        this.cards.push(card);
-      });
+      .subscribe(card => this.cards.push(newCard));
   }
 
   fetchApiCards(){
@@ -54,4 +57,9 @@ export class CardsComponent implements OnInit {
       });
       return this.apiCards;
   }
+
+  numberOfPages(){
+    return Math.ceil(this.cards.length / this.pageSize);
+  };
+
 }

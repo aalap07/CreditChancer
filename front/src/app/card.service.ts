@@ -19,8 +19,11 @@ export class CardService {
   postCard(newCard) {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/new', newCard, { headers: headers })
-      .map(res => res.json());
+    return this.http.post('http://localhost:3000/api/new', newCard, { headers: headers })
+      .map(res => {
+        alert(res.json().msg)
+      }
+      );
   }
 
   getApiCards(query){

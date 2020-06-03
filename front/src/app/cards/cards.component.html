@@ -50,7 +50,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let card of cards | filter: term | slice: 0:11">
+                            <tr *ngFor="let card of cards | filter: term | slice: (curPage * pageSize) - pageSize :curPage * pageSize">
                                 <th scope="row">{{ card.name }}</th>
                                 <td>{{ card.creditScore }}</td>
                                 <td>{{ card.acctAgeYrs }}</td>
@@ -58,6 +58,12 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div style="text-align: center;">
+                        <button style="margin:1%" class="btn btn-primary" [disabled] ="curPage == 1" (click)="curPage = curPage - 1"><</button>
+                        <span>Page {{curPage}} of {{ numberOfPages() }}</span>
+                        <button style="margin:1%" class="btn btn-primary" [disabled] = "curPage >= cards.length/pageSize" 
+                                 (click) ="curPage = curPage + 1">></button>
+                </div>
                 </div>
             </div>
             <div class="container">
@@ -67,7 +73,7 @@
                 <h2>Add a data point</h2>
                 <div class="row">
                     <div class="col-md-8">
-                        <input class="form-control" type="text" [(ngModel)]="apisearch" placeholder="Search for a card"
+                        <input class="form-control" type="text" [(ngModel)]="apisearch" placeholder="Search for a card to add"
                             aria-label="Search" required />
                     </div>
                     <div class="col-md-3">
@@ -101,7 +107,8 @@
                                             <input type="text" [(ngModel)]="acctAgeMos" name="acctAgeMos"
                                                 class="form-control" required />
                                         </div>
-                                        <input type="submit" class="btn btn-primary" />
+                                        <input style="margin:1%" type="submit" class="btn btn-primary" />
+                                        <input type="reset" class="btn btn-dark" value="Clear"/>
                                     </form>
                                 </mat-expansion-panel>
                             </tr>

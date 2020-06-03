@@ -9,7 +9,7 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.post("/new", (req, res, next) => {
+router.post("/api/new", (req, res, next) => {
   let cardToAdd = new Card({
     id: req.body.id,
     name: req.body.name,
