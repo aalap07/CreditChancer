@@ -1384,8 +1384,8 @@ button, input, select, textarea, label {
 @media (min-width: 641px) {
     .hero {
         text-align: left;
-        padding-top: 88px;
-        padding-bottom: 120px
+        padding-top: 10%;
+        padding-bottom: 20%
     }
     .hero-inner {
         display: flex;
