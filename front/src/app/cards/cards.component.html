@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>CreditChancer</title>
-    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:500" rel="stylesheet">
-    <link rel="stylesheet" href="/cards.component.css">
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:500" rel="stylesheet" />
+    <link rel="stylesheet" href="/cards.component.css" />
 </head>
 
 <body style="background-image: url(../../assets/home_bg.svg);">
@@ -16,8 +16,10 @@
                     <div class="hero-inner">
                         <div class="hero-copy">
                             <h1 class="hero-title mt-0">Welcome to CreditChancer</h1>
-                            <p class="hero-paragraph">Learn your odds of getting approved for any credit card in under a
-                                minute</p>
+                            <p class="hero-paragraph">
+                                Learn your odds of getting approved for any credit card in
+                                under a minute
+                            </p>
                             <div class="hero-cta">
                                 <a class="button button-primary" href="#records">Get started</a>
                                 <a class="button button-secondary" href="#contribute">Contribute</a>
@@ -26,22 +28,18 @@
                     </div>
                 </div>
             </section>
-
-
             <div class="container" id="records">
-                <h2>View data points</h2>
+                <h2>View approval data</h2>
                 <div class="row">
                     <div class="col-md">
                         <input class="form-control" type="text" [(ngModel)]="term" placeholder="Find a card"
-                            aria-label="Search">
+                            aria-label="Search" />
                     </div>
                 </div>
             </div>
-
             <div class="container">
                 <div>
                     <br /><br />
-                    <!-- <p *ngFor="let apiCard of apiCards">{{apiCard}}</p> -->
                     <table class="table">
                         <thead>
                             <tr>
@@ -52,7 +50,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let card of cards | filter: term | slice:1:11">
+                            <tr *ngFor="let card of cards | filter: term | slice: 0:11">
                                 <th scope="row">{{ card.name }}</th>
                                 <td>{{ card.creditScore }}</td>
                                 <td>{{ card.acctAgeYrs }}</td>
@@ -67,39 +65,61 @@
             </div>
             <div class="container" id="contribute">
                 <h2>Add a data point</h2>
-                <form (submit)="addCard()">
-                    <div class="form-group">
-                        <label>Card Name</label>
-                        <input [(ngModel)]="name" name="name" class="form-control" required />
+                <div class="row">
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" [(ngModel)]="apisearch" placeholder="Search for a card"
+                            aria-label="Search" required />
                     </div>
-                    <div class="form-group">
-                        <label>Credit Score</label>
-                        <input type="text" [(ngModel)]="creditScore" name="creditScore" class="form-control" required />
+                    <div class="col-md-3">
+                        <form (submit)="fetchApiCards()">
+                            <input type="submit" class="btn btn-primary" value="Search" />
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label>Age of Oldest Account in Years</label>
-                        <input type="text" [(ngModel)]="acctAgeYrs" name="acctAgeYrs" class="form-control" required />
-                    </div>
-                    <div class="form-group">
-                        <label>Age of Oldest Account in Months</label>
-                        <input type="text" [(ngModel)]="acctAgeMos" name="acctAgeMos" class="form-control" required />
-                    </div>
-                    <input type="submit" class="btn btn-primary">
-                </form>
-            </div>
-            <div class="container-sm">
-                <div class="cta-inner section-inner">
+                </div>
+                <div>
+                    <h4>{{ apiCards.length }} result(s)</h4>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let apicard of apiCards | slice: 0:11">
+                                <mat-expansion-panel>
+                                    <mat-expansion-panel-header>
+                                        <label id="name">{{ apicard }}</label>
+                                    </mat-expansion-panel-header>
+                                    <form (submit)="addCard(apicard)">
+                                        <div class="form-group">
+                                            <label>Credit Score</label>
+                                            <input type="text" [(ngModel)]="creditScore" name="creditScore"
+                                                class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Age of Oldest Account in Years</label>
+                                            <input type="text" [(ngModel)]="acctAgeYrs" name="acctAgeYrs"
+                                                class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Age of Oldest Account in Months</label>
+                                            <input type="text" [(ngModel)]="acctAgeMos" name="acctAgeMos"
+                                                class="form-control" required />
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" />
+                                    </form>
+                                </mat-expansion-panel>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-
+            <div class="container-sm">
+                <div class="cta-inner section-inner"></div>
+            </div>
         </main>
-
         <footer class="site-footer has-top-divider">
             <div class="container">
                 <div class="site-footer-inner">
-                    <div class="footer-copyright">&copy; 2020 Aalap Patel. All rights reserved.
-                        This app is for informational purposes only and has no affiliation with any financial institutions or credit bureaus.
+                    <div class="footer-copyright">
+                        &copy; 2020 Aalap Patel. All rights reserved. This app is for
+                        informational purposes only and has no affiliation with any
+                        financial institutions or credit bureaus.
                     </div>
                 </div>
             </div>

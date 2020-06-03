@@ -19,24 +19,17 @@ export class CardsComponent implements OnInit {
   acctAgeMos: number;
   apiCards: String[];
   apiCard: string;
+  apisearch: string;
 
   constructor(private cardService: CardService) { }
 
   ngOnInit() {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
-    this.cardService.getApiCards().subscribe(
-      (apiCards) => {
-        var filtered = new Array();
-        for(var i = 0; i < apiCards.results.length; i++){
-          filtered.push(apiCards.results[i].title);
-        }
-        this.apiCards = filtered;
-      });
   }
 
-  addCard() {
+  addCard(cardName) {
     const newCard = {
-      name: this.name,
+      name: cardName,
       creditScore: this.creditScore,
       acctAgeYrs: this.acctAgeYrs,
       acctAgeMos: this.acctAgeMos
@@ -45,5 +38,20 @@ export class CardsComponent implements OnInit {
       .subscribe(card => {
         this.cards.push(card);
       });
+  }
+
+  fetchApiCards(){
+    this.cardService.getApiCards(this.apisearch).subscribe(
+      (apiCards) => {
+        console.log(apiCards.results.length);
+
+        var filtered = new Array();
+        for(var i = 0; i < apiCards.results.length; i++){
+          console.log(apiCards.results[i].title);
+          filtered.push(apiCards.results[i].title);
+        }
+        this.apiCards = filtered;
+      });
+      return this.apiCards;
   }
 }
