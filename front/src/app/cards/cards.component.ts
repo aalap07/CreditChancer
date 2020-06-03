@@ -28,7 +28,6 @@ export class CardsComponent implements OnInit {
       (apiCards) => {
         var filtered = new Array();
         for(var i = 0; i < apiCards.results.length; i++){
-          //console.log(apiCards.results[i].original_title);
           filtered.push(apiCards.results[i].title);
         }
         this.apiCards = filtered;
