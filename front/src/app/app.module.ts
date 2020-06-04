@@ -10,9 +10,14 @@ import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { FormsModule } from "@angular/forms";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import * as PlotlyJS from 'plotly.js/dist/plotly.js';
+import { PlotlyModule } from 'angular-plotly.js';
+import { UserChartComponent } from './user-chart/user-chart.component';
+ 
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
-  declarations: [AppComponent, CardsComponent],
+  declarations: [AppComponent, CardsComponent, UserChartComponent],
   imports: [
     BrowserModule,
     HttpModule,
@@ -21,7 +26,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MatExpansionModule,
     FormsModule,
     Ng2SearchPipeModule,
-    HttpClientModule
+    HttpClientModule,
+    PlotlyModule
   ],
   providers: [],
   bootstrap: [AppComponent],

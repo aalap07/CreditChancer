@@ -1313,7 +1313,9 @@ button, input, select, textarea, label {
 }
 
 .hero-paragraph {
-    margin-bottom: 32px
+    margin-bottom: 32px;
+    margin-top:15%; 
+    color: black;
 }
 
 .hero-cta {
