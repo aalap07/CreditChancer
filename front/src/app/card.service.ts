@@ -27,7 +27,7 @@ export class CardService {
   }
 
   getApiCards(query){
-    return this.http.get(`https://api.ccstack.io/v1/search/cards?api_key=CCSTACK_API_KEY&query=${query}`)
+    return this.http.get(`https://api.ccstack.io/v1/search/cards?api_key=CC&query=${query}`)
       .map(res=>res.json());
   }
 
