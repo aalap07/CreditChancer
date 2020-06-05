@@ -42,7 +42,9 @@ export class CardsComponent implements OnInit {
     };
     this.cardService
       .postCard(newCard)
-      .subscribe((card) => this.cards.push(newCard));
+      .subscribe((card) => {
+        this.cards.push(newCard)
+      });
   }
 
   fetchApiCards() {
