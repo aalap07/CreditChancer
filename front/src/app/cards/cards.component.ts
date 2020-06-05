@@ -16,16 +16,11 @@ export class CardsComponent implements OnInit {
   creditScore: number;
   acctAgeYrs: number;
   acctAgeMos: number;
-  apiCards: String[];
-  apiCard: string;
-  apisearch: string;
   approvedPage: number;
-  addCardPage: number;
   pageSize: number;
 
   constructor(private cardService: CardService) {
     this.approvedPage = 1;
-    this.addCardPage = 1;
     this.pageSize = 10;
   }
 
@@ -33,12 +28,12 @@ export class CardsComponent implements OnInit {
     this.cardService.getCards().subscribe((cards) => (this.cards = cards));
   }
 
-  addCard(cardName) {
+  addCard(cardName, creditScore, acctAgeYrs, acctAgeMos) {
     const newCard = {
       name: cardName,
-      creditScore: this.creditScore,
-      acctAgeYrs: this.acctAgeYrs,
-      acctAgeMos: this.acctAgeMos,
+      creditScore: creditScore,
+      acctAgeYrs: acctAgeYrs,
+      acctAgeMos: acctAgeMos,
     };
     this.cardService
       .postCard(newCard)
@@ -47,23 +42,8 @@ export class CardsComponent implements OnInit {
       });
   }
 
-  fetchApiCards() {
-    this.cardService.getApiCards(this.apisearch).subscribe((apiCards) => {
-      var filtered = new Array();
-      for (var i = 0; i < apiCards.results.length; i++) {
-        filtered.push(apiCards.results[i].title);
-      }
-      this.apiCards = filtered;
-    });
-    return this.apiCards;
-  }
-
   numApprovedPages() {
     return Math.ceil(this.cards.length / this.pageSize);
-  }
-
-  numAddCardPages() {
-    return Math.ceil(this.apiCards.length / this.pageSize);
   }
 
   scrollToElement($element): void {

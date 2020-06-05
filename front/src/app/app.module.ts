@@ -13,11 +13,12 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
 import { UserChartComponent } from './user-chart/user-chart.component';
+import { ContributeComponent } from './contribute/contribute.component';
  
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
-  declarations: [AppComponent, CardsComponent, UserChartComponent],
+  declarations: [AppComponent, CardsComponent, UserChartComponent, ContributeComponent],
   imports: [
     BrowserModule,
     HttpModule,
