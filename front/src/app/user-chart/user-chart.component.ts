@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import {ChanceStepperComponent} from "../chance-stepper/chance-stepper.component";
+import { ChanceStepperComponent } from "../chance-stepper/chance-stepper.component";
 import { Card } from '../card';
-import {CardService} from '../card.service';
+import { CardService } from '../card.service';
 
 @Component({
   selector: "app-user-chart",
@@ -13,11 +13,10 @@ export class UserChartComponent {
   yNums: number[];
 
 
-  constructor(private chanceStepperComponent: ChanceStepperComponent, private cardService: CardService) { 
+  constructor(private chanceStepperComponent: ChanceStepperComponent, private cardService: CardService) {
     this.xNums = new Array();
     this.yNums = new Array();
     // this.migrateDataPoints();
-
   }
 
   public graph = {
@@ -26,13 +25,14 @@ export class UserChartComponent {
         x: [],
         y: [],
         mode: 'markers',
-        marker: { size: 20 },
+        name: "",
+        marker: { size: 20, color: "red" },
       },
     ],
-    layout: { title: "Chances"},
+    layout: { title: "Chances" },
   };
 
-  migrateDataPoints(){
+  migrateDataPoints() {
     this.xNums = this.chanceStepperComponent.getXVals();
     this.yNums = this.chanceStepperComponent.getYVals();
     this.graph.data = [
@@ -40,20 +40,25 @@ export class UserChartComponent {
         x: this.xNums,
         y: this.yNums,
         mode: "markers",
-        marker: { size: 20 },
+        name: "Others",
+        marker: { size: 20, color: "green" },
       },
     ];
+    this.addUserPoint();
   }
 
 
   addUserPoint() {
-    this.graph.data = [
+    var xAdd = this.chanceStepperComponent.getUserX();
+    var yAdd = this.chanceStepperComponent.getUserY();
+    this.graph.data.push(
       {
-        x: [1, 2, 3],
-        y: [2, 6, 3],
+        x: [xAdd],
+        y: [yAdd],
         mode: "markers",
-        marker: { size: 20 },
+        name: "You",
+        marker: { size: 20, color: "red" },
       },
-    ];
+    );
   }
 }

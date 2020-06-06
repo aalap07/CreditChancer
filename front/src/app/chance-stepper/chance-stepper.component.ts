@@ -14,7 +14,7 @@ import { NonzeroEntryPipe } from '../nonzero-entry.pipe';
 export class ChanceStepperComponent implements OnInit {
   cardGroup: FormGroup;
   selectorGroup: FormGroup;
-  thirdFormGroup: FormGroup;
+  userDataGroup: FormGroup;
   isEditable = true;
   apiCards: String[];
   apiCard: string;
@@ -40,7 +40,7 @@ export class ChanceStepperComponent implements OnInit {
     this.selectorGroup = this._formBuilder.group({
       selectedEntry: ['', Validators.required]
     });
-    this.thirdFormGroup = this._formBuilder.group({
+    this.userDataGroup = this._formBuilder.group({
       scoreCtrl: ['', Validators.required],
       yrCtrl: ['', Validators.required],
       moCtrl: ['', Validators.required]
@@ -67,6 +67,14 @@ export class ChanceStepperComponent implements OnInit {
       }
     }
     
+  }
+
+  getUserX(){
+    return this.userDataGroup.get('yrCtrl').value * 12 + this.userDataGroup.get('moCtrl').value;
+  }
+
+  getUserY(){
+    return this.userDataGroup.get('scoreCtrl').value;
   }
 
   getXVals(){
