@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import {ChanceStepperComponent} from "../chance-stepper/chance-stepper.component";
+import { Card } from '../card';
+import {CardService} from '../card.service';
 
 @Component({
   selector: "app-user-chart",
@@ -6,29 +9,32 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./user-chart.component.css"],
 })
 export class UserChartComponent {
-  constructor() { }
+ 
+
+  constructor(private chanceStepperComponent: ChanceStepperComponent, private cardService: CardService) { 
+   
+  }
 
   public graph = {
     data: [
       {
         x: [],
         y: [],
-        type: "scatter",
-        mode: "points",
-        marker: { color: "blue" },
+        mode: 'markers',
+        marker: { size: 20 },
       },
     ],
-    layout: { title: "Chances" },
+    layout: { title: "Chances"},
   };
 
-  addChartPoint() {
+
+  addUserPoint() {
     this.graph.data = [
       {
         x: [1, 2, 3],
         y: [2, 6, 3],
-        type: "scatter",
-        mode: "points",
-        marker: { color: "blue" },
+        mode: "markers",
+        marker: { size: 20 },
       },
     ];
   }

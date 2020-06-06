@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CardService } from "../card.service";
+import { UserChartComponent } from "../user-chart/user-chart.component";
+import {Card} from "../card";
 
 @Component({
   selector: 'app-chance-stepper',
@@ -17,7 +19,15 @@ export class ChanceStepperComponent implements OnInit {
   chanceSearch: string;
   selectedCard: string;
 
-  constructor(private _formBuilder: FormBuilder, private cardService: CardService) { }
+  dbRecords: Card[];
+  xVals: number[]; // length of account
+  yVals: number[]; // credit score
+
+  constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
+    this.cardService.getCards().subscribe((cards) => (this.dbRecords = cards));
+    this.xVals = new Array();
+    this.yVals = new Array();
+   }
 
   ngOnInit() {
     this.cardGroup = this._formBuilder.group({
@@ -35,11 +45,21 @@ export class ChanceStepperComponent implements OnInit {
     this.cardService.getApiCards(this.chanceSearch).subscribe((apiCards) => {
       var filtered = new Array();
       for (var i = 0; i < apiCards.results.length; i++) {
-        console.log(apiCards.results[i].title);
         filtered.push(apiCards.results[i].title);
       }
       this.apiCards = filtered;
     });
     return this.apiCards;
   }
+
+  createDataArray(){
+    for (var i = 0; i < this.dbRecords.length; i++){
+      if (this.dbRecords[i].name == this.selectorGroup.get('selectedEntry').value){
+        this.yVals.push(this.dbRecords[i].creditScore);
+        var totalLength = this.dbRecords[i].acctAgeYrs * 12 + this.dbRecords[i].acctAgeMos;
+        this.xVals.push(totalLength);
+      }
+    }
+  }
+
 }

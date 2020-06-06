@@ -2,7 +2,7 @@
     <mat-step [stepControl]="cardGroup" [editable]="isEditable">
         <form [formGroup]="cardGroup" (submit)="fetchApiCards()">
             <ng-template matStepLabel>Search for a card</ng-template>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Card Name or Issuer</mat-label>
                 <input style="margin:1%" matInput formControlName="cardSearchCtrl" [(ngModel)]="chanceSearch"
                     placeholder="e.g. Chase Freedom" required>
@@ -13,9 +13,9 @@
         </form>
     </mat-step>
     <mat-step [stepControl]="selectorGroup" [editable]="isEditable">
-        <form [formGroup]="selectorGroup">
+        <form (submit)="createDataArray()" [formGroup]="selectorGroup">
             <ng-template matStepLabel>Select entry</ng-template>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
             <table>
                 <tbody>
                     <tr *ngFor="let apicard of apiCards" >
@@ -36,9 +36,19 @@
     <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
         <form [formGroup]="thirdFormGroup">
             <ng-template matStepLabel>Enter your basic info</ng-template>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Credit Score</mat-label>
-                <input style="margin:1%" matInput formControlName="thirdCtrl" placeholder="800" required>
+                <input type="tel" min="300" max="850" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 650" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <mat-label>Age of your oldest credit account in years</mat-label>
+                <input type="number" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 1" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="outline">
+                <mat-label>Age of your oldest credit account in months</mat-label>
+                <input type="number" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 6" required>
             </mat-form-field>
             <div>
                 <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
@@ -47,11 +57,11 @@
         </form>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
+        <ng-template matStepLabel>Results</ng-template>
+        <app-user-chart></app-user-chart>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
+            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset()">Reset</button>
         </div>
     </mat-step>
 </mat-horizontal-stepper>
