@@ -9,10 +9,15 @@ import {CardService} from '../card.service';
   styleUrls: ["./user-chart.component.css"],
 })
 export class UserChartComponent {
- 
+  xNums: number[];
+  yNums: number[];
+
 
   constructor(private chanceStepperComponent: ChanceStepperComponent, private cardService: CardService) { 
-   
+    this.xNums = new Array();
+    this.yNums = new Array();
+    // this.migrateDataPoints();
+
   }
 
   public graph = {
@@ -26,6 +31,19 @@ export class UserChartComponent {
     ],
     layout: { title: "Chances"},
   };
+
+  migrateDataPoints(){
+    this.xNums = this.chanceStepperComponent.getXVals();
+    this.yNums = this.chanceStepperComponent.getYVals();
+    this.graph.data = [
+      {
+        x: this.xNums,
+        y: this.yNums,
+        mode: "markers",
+        marker: { size: 20 },
+      },
+    ];
+  }
 
 
   addUserPoint() {

@@ -5,6 +5,7 @@ import { UserChartComponent } from "../user-chart/user-chart.component";
 import { Card } from "../card";
 import { NonzeroEntryPipe } from '../nonzero-entry.pipe';
 
+
 @Component({
   selector: 'app-chance-stepper',
   templateUrl: './chance-stepper.component.html',
@@ -25,7 +26,9 @@ export class ChanceStepperComponent implements OnInit {
   yVals: number[]; // credit score
 
   constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
-    this.cardService.getCards().subscribe((cards) => (this.dbRecords = cards));
+    this.cardService.getCards().subscribe((cards) => {
+      this.dbRecords = cards;
+    });
     this.xVals = new Array();
     this.yVals = new Array();
   }
@@ -38,7 +41,9 @@ export class ChanceStepperComponent implements OnInit {
       selectedEntry: ['', Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
-      thirdCtrl: ['', Validators.required]
+      scoreCtrl: ['', Validators.required],
+      yrCtrl: ['', Validators.required],
+      moCtrl: ['', Validators.required]
     });
   }
 
@@ -53,8 +58,6 @@ export class ChanceStepperComponent implements OnInit {
     return this.apiCards;
   }
 
-
-
   createDataArray() {
     for (var i = 0; i < this.dbRecords.length; i++) {
       if (this.dbRecords[i].name == this.selectorGroup.get('selectedEntry').value) {
@@ -63,6 +66,15 @@ export class ChanceStepperComponent implements OnInit {
         this.xVals.push(totalLength);
       }
     }
+    
+  }
+
+  getXVals(){
+    return this.xVals;
+  }
+
+  getYVals(){
+    return this.yVals;
   }
 
 }

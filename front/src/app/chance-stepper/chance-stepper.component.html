@@ -38,17 +38,17 @@
             <ng-template matStepLabel>Enter your basic info</ng-template>
             <mat-form-field appearance="outline">
                 <mat-label>Credit Score</mat-label>
-                <input type="tel" min="300" max="850" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 650" required>
+                <input type="tel" min="300" max="850" style="margin:1%" matInput formControlName="scoreCtrl" placeholder="300-850" required>
             </mat-form-field>
             <br>
             <mat-form-field appearance="outline">
                 <mat-label>Age of your oldest credit account in years</mat-label>
-                <input type="number" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 1" required>
+                <input type="number" style="margin:1%" matInput formControlName="yrCtrl" placeholder="e.g. 1" required>
             </mat-form-field>
             <br>
             <mat-form-field appearance="outline">
                 <mat-label>Age of your oldest credit account in months</mat-label>
-                <input type="number" style="margin:1%" matInput formControlName="thirdCtrl" placeholder="e.g. 6" required>
+                <input type="number" style="margin:1%" matInput formControlName="moCtrl" placeholder="<= 11" required>
             </mat-form-field>
             <div>
                 <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
