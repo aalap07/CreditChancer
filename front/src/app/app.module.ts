@@ -16,6 +16,7 @@ import { UserChartComponent } from './user-chart/user-chart.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import {MatStepperModule, MatStep} from '@angular/material/stepper';
 import { ChanceStepperComponent } from './chance-stepper/chance-stepper.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -32,7 +33,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     HttpClientModule,
     PlotlyModule,
     MatStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent],

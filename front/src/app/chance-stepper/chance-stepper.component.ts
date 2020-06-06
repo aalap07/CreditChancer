@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CardService } from "../card.service";
 
 @Component({
   selector: 'app-chance-stepper',
@@ -8,21 +9,37 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ChanceStepperComponent implements OnInit {
   cardGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  selectorGroup: FormGroup;
   thirdFormGroup: FormGroup;
   isEditable = true;
+  apiCards: String[];
+  apiCard: string;
+  chanceSearch: string;
+  selectedCard: string;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder, private cardService: CardService) { }
 
   ngOnInit() {
     this.cardGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      cardSearchCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+    this.selectorGroup = this._formBuilder.group({
+      selectedEntry: ['', Validators.required]
     });
     this.thirdFormGroup = this._formBuilder.group({
       thirdCtrl: ['', Validators.required]
     });
+  }
+
+  fetchApiCards() {
+    this.cardService.getApiCards(this.chanceSearch).subscribe((apiCards) => {
+      var filtered = new Array();
+      for (var i = 0; i < apiCards.results.length; i++) {
+        console.log(apiCards.results[i].title);
+        filtered.push(apiCards.results[i].title);
+      }
+      this.apiCards = filtered;
+    });
+    return this.apiCards;
   }
 }
