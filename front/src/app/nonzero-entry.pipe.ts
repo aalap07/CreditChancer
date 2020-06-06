@@ -6,19 +6,22 @@ import { CardService } from './card.service';
   name: 'nonzeroEntry'
 })
 export class NonzeroEntryPipe implements PipeTransform {
-  names: String[];
+  filtered: String[];
 
   constructor(private cardService: CardService){
-    this.names = new Array();
   }
 
-  transform(arg1): unknown {
+  transform(apiArray): unknown {
+    this.filtered = new Array();
+
     this.cardService.getCards().subscribe((cards) => {
-      for (var i = 0; i < cards.length; i++){
-        this.names.push(cards[i].name);
+      for (var i = 0; i < apiArray.length; i++){
+        if (apiArray.includes(cards[i].name) && !this.filtered.includes(cards[i].name)){
+          this.filtered.push(cards[i].name);
+        }
       }
     });
-    return this.names.includes(arg1[0]) ? arg1[0] : null;
+    return this.filtered;
   }
 
 }
