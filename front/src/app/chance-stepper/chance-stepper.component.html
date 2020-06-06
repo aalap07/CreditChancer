@@ -18,7 +18,7 @@
             <mat-form-field appearance="outline">
             <table>
                 <tbody>
-                    <tr *ngFor="let apicard of apiCards" >
+                    <tr *ngFor="let apicard of apiCards | nonzeroEntry: apicard" >
                 <mat-radio-group formControlName="selectedEntry" [(ngModel)]="selectedCard"
                     [ngModelOptions]="{standalone: true}">
                   <mat-radio-button [value]="apicard">{{apicard}}</mat-radio-button>

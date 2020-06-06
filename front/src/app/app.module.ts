@@ -17,11 +17,12 @@ import { ContributeComponent } from './contribute/contribute.component';
 import {MatStepperModule, MatStep} from '@angular/material/stepper';
 import { ChanceStepperComponent } from './chance-stepper/chance-stepper.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { NonzeroEntryPipe } from './nonzero-entry.pipe';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
-  declarations: [AppComponent, CardsComponent, UserChartComponent, ContributeComponent, ChanceStepperComponent],
+  declarations: [AppComponent, CardsComponent, UserChartComponent, ContributeComponent, ChanceStepperComponent, NonzeroEntryPipe],
   imports: [
     BrowserModule,
     HttpModule,
