@@ -22,6 +22,7 @@ export class CardsComponent implements OnInit {
   constructor(private cardService: CardService) {
     this.approvedPage = 1;
     this.pageSize = 10;
+    this.cards = new Array();
   }
 
   ngOnInit() {

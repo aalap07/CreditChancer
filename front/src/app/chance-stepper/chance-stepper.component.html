@@ -28,7 +28,6 @@
             </table>
             </mat-form-field>
             <div>
-                <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -51,7 +50,6 @@
                 <input type="number" style="margin:1%" matInput formControlName="moCtrl" placeholder="<= 11" required>
             </mat-form-field>
             <div>
-                <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -60,7 +58,6 @@
         <ng-template matStepLabel>Results</ng-template>
         <app-user-chart></app-user-chart>
         <div>
-            <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
             <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetPlot()">Reset</button>
         </div>
     </mat-step>
