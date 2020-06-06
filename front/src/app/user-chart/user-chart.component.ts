@@ -12,11 +12,9 @@ export class UserChartComponent {
   xNums: number[];
   yNums: number[];
 
-
-  constructor(private chanceStepperComponent: ChanceStepperComponent, private cardService: CardService) {
+  constructor(private cardService: CardService) {
     this.xNums = new Array();
     this.yNums = new Array();
-    // this.migrateDataPoints();
   }
 
   public graph = {
@@ -32,9 +30,9 @@ export class UserChartComponent {
     layout: { title: "Chances" },
   };
 
-  migrateDataPoints() {
-    this.xNums = this.chanceStepperComponent.getXVals();
-    this.yNums = this.chanceStepperComponent.getYVals();
+  migrateDataPoints(xVals: number[], yVals: number[]) {
+    this.xNums = xVals;
+    this.yNums = yVals;
     this.graph.data = [
       {
         x: this.xNums,
@@ -44,13 +42,10 @@ export class UserChartComponent {
         marker: { size: 20, color: "green" },
       },
     ];
-    this.addUserPoint();
   }
 
-
-  addUserPoint() {
-    var xAdd = this.chanceStepperComponent.getUserX();
-    var yAdd = this.chanceStepperComponent.getUserY();
+  addUserPoint(xAdd: number, yAdd: number) {
+   
     this.graph.data.push(
       {
         x: [xAdd],
@@ -61,4 +56,18 @@ export class UserChartComponent {
       },
     );
   }
+
+  resetGraphData(){
+
+    this.graph.data = [
+      {
+        x: [],
+        y: [],
+        mode: 'markers',
+        name: "",
+        marker: { size: 20, color: "red" },
+      },
+    ];
+  }
+
 }

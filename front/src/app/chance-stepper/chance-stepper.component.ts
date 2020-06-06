@@ -9,13 +9,14 @@ import { NonzeroEntryPipe } from '../nonzero-entry.pipe';
 @Component({
   selector: 'app-chance-stepper',
   templateUrl: './chance-stepper.component.html',
-  styleUrls: ['./chance-stepper.component.css']
+  styleUrls: ['./chance-stepper.component.css'],
+  providers: [UserChartComponent]
 })
 export class ChanceStepperComponent implements OnInit {
   cardGroup: FormGroup;
   selectorGroup: FormGroup;
   userDataGroup: FormGroup;
-  isEditable = true;
+  isEditable = false;
   apiCards: String[];
   apiCard: string;
   chanceSearch: string;
@@ -25,7 +26,7 @@ export class ChanceStepperComponent implements OnInit {
   xVals: number[]; // length of account
   yVals: number[]; // credit score
 
-  constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
+  constructor(private _formBuilder: FormBuilder, private cardService: CardService, private userChartComponent: UserChartComponent) {
     this.cardService.getCards().subscribe((cards) => {
       this.dbRecords = cards;
     });
@@ -66,23 +67,19 @@ export class ChanceStepperComponent implements OnInit {
         this.xVals.push(totalLength);
       }
     }
-    
+    this.sendCardData();
   }
 
-  getUserX(){
-    return this.userDataGroup.get('yrCtrl').value * 12 + this.userDataGroup.get('moCtrl').value;
+  sendCardData(){
+    return this.userChartComponent.migrateDataPoints(this.xVals, this.yVals);
   }
 
-  getUserY(){
-    return this.userDataGroup.get('scoreCtrl').value;
+  sendUserData(){
+    return this.userChartComponent.addUserPoint(this.userDataGroup.get('yrCtrl').value * 12 + this.userDataGroup.get('moCtrl').value, Number(this.userDataGroup.get('scoreCtrl').value));
   }
 
-  getXVals(){
-    return this.xVals;
-  }
-
-  getYVals(){
-    return this.yVals;
+  resetPlot(){
+    return this.userChartComponent.resetGraphData();
   }
 
 }

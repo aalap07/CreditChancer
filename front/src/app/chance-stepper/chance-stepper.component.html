@@ -28,13 +28,13 @@
             </table>
             </mat-form-field>
             <div>
-                <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
+                <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="userDataGroup" [editable]="isEditable">
-        <form [formGroup]="userDataGroup">
+        <form (submit)="sendUserData()" [formGroup]="userDataGroup">
             <ng-template matStepLabel>Enter your basic info</ng-template>
             <mat-form-field appearance="outline">
                 <mat-label>Credit Score</mat-label>
@@ -51,7 +51,7 @@
                 <input type="number" style="margin:1%" matInput formControlName="moCtrl" placeholder="<= 11" required>
             </mat-form-field>
             <div>
-                <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
+                <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -60,8 +60,8 @@
         <ng-template matStepLabel>Results</ng-template>
         <app-user-chart></app-user-chart>
         <div>
-            <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
-            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset()">Reset</button>
+            <!-- <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button> -->
+            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetPlot()">Reset</button>
         </div>
     </mat-step>
 </mat-horizontal-stepper>
