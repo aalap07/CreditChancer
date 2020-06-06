@@ -1,0 +1,52 @@
+
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="cardGroup" [editable]="isEditable">
+    <form [formGroup]="cardGroup">
+      <ng-template matStepLabel>Search for a card</ng-template>
+      <mat-form-field>
+        <mat-label>Card Name or Issuer</mat-label>
+        <input style="margin:1%" matInput formControlName="firstCtrl" placeholder="e.g. Chase Freedom" required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Select entry</ng-template>
+      <mat-form-field>
+        <!-- <mat-label>Address</mat-label>
+        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+               required> -->
+      </mat-form-field>
+      <div>
+        <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
+        <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+   <mat-step [stepControl]="thirdFormGroup" [editable]="isEditable">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Enter your basic info</ng-template>
+      <mat-form-field>
+        <mat-label>Credit Score</mat-label>
+        <input matInput formControlName="thirdCtrl" placeholder="800"
+               required>
+      </mat-form-field>
+      <div>
+        <button class="btn btn-outline-dark" mat-button matStepperPrevious>Back</button>
+        <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
