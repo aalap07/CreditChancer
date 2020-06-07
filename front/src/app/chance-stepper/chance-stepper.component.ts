@@ -56,7 +56,15 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "red" },
       },
     ],
-    layout: { title: "Chances" },
+    layout: { 
+      title: "Chances",
+      xaxis: {
+        title: 'Oldest Account Age (Total months)',
+      },
+      yaxis: {
+        title: 'Credit Score',
+      }
+    },
   };
 
   fetchApiCards() {

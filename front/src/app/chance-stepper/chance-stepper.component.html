@@ -15,6 +15,8 @@
     <mat-step [stepControl]="selectorGroup" [editable]="isEditable">
         <form (submit)="createDataArray()" [formGroup]="selectorGroup">
             <ng-template matStepLabel>Select entry</ng-template>
+            <h5>Results for {{chanceSearch}}</h5>
+
             <mat-form-field appearance="outline">
             <table>
                 <tbody>
@@ -28,6 +30,7 @@
             </table>
             </mat-form-field>
             <div>
+                <button class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Back</button>
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
