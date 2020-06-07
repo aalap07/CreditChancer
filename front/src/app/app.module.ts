@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
-import { UserChartComponent } from './user-chart/user-chart.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import {MatStepperModule, MatStep} from '@angular/material/stepper';
 import { ChanceStepperComponent } from './chance-stepper/chance-stepper.component';
@@ -22,7 +21,7 @@ import { NonzeroEntryPipe } from './nonzero-entry.pipe';
 PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
-  declarations: [AppComponent, CardsComponent, UserChartComponent, ContributeComponent, ChanceStepperComponent, NonzeroEntryPipe],
+  declarations: [AppComponent, CardsComponent, ContributeComponent, ChanceStepperComponent, NonzeroEntryPipe],
   imports: [
     BrowserModule,
     HttpModule,
