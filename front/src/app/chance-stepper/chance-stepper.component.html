@@ -65,19 +65,30 @@
             </plotly-plot>
             <div style="text-align: center;">
             <h4>Approval statistics from our database</h4>
-            <p>Average credit score: <b>{{avgScore}}</b>
-                <br>
-                Average oldest account age: <b>{{avgAgeYrs}} years and {{avgAgeMos}} months</b>
-                <br>
-                <br>
-                25th percentile credit score (1st quartile): <b>{{q1Score}}</b><br>
-                Median credit score: <b>{{medianScore}}</b> <br>
-                75th percentile credit score (3rd quartile): <b>{{q3Score}}</b><br>
-                <br>
-                25th percentile oldest account age (1st quartile): <b>{{q1AcctYrs}} years and {{q1AcctMos}} months</b><br>
-                Median oldest account age: <b>{{medianAcctYrs}} years and {{medianAcctMos}} months</b> <br>
-                75th percentile oldest account age (3rd quartile): <b>{{q3AcctYrs}} years and {{q3AcctMos}} months</b><br>
+            <h5>Where you stand</h5>
+            <p>
+                Your credit score percentile is {{userScorePercentile}}. <br>
+                Your account ownership length percentile is {{userLengthPercentile}}.
             </p>
+
+            <h5>Credit Score</h5>
+            <p>Average: <b>{{avgScore}}</b>
+                <br>
+                25th percentile (1st quartile): <b>{{q1Score}}</b><br>
+                Median: <b>{{medianScore}}</b> <br>
+                75th percentile (3rd quartile): <b>{{q3Score}}</b><br>
+                <br>
+            </p>
+            <h5>Oldest Account Age</h5>
+            <p>
+                Average: <b>{{avgAgeYrs}} years and {{avgAgeMos}} months</b>
+                <br>
+                
+                25th percentile (1st quartile): <b>{{q1AcctYrs}} years and {{q1AcctMos}} months</b><br>
+                Median: <b>{{medianAcctYrs}} years and {{medianAcctMos}} months</b> <br>
+                75th percentile (3rd quartile): <b>{{q3AcctYrs}} years and {{q3AcctMos}} months</b><br>
+            </p>
+            
         </div>
             <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetGraphData()">Start over</button>
         </div>

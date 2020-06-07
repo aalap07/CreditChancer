@@ -51,6 +51,9 @@ export class ChanceStepperComponent implements OnInit {
   q3AcctMos: number;
   stDevAcctMos: number;
   
+  userScorePercentile: number;
+  userLengthPercentile: number;
+
   constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
     this.cardService.getCards().subscribe((cards) => {
       this.dbRecords = cards;
@@ -167,6 +170,7 @@ export class ChanceStepperComponent implements OnInit {
 
     this.stDevAcctYrs = Math.round(this.stDevAcctRaw / 12);
     this.stDevAcctMos = Math.round(this.stDevAcctRaw % 12);
+
   }
 
   private addUserPoint(xAdd: number, yAdd: number) {
@@ -179,6 +183,9 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "red" },
       },
     );
+    this.userScorePercentile = Math.round(this.percentile(this.yNums, yAdd));
+    this.userLengthPercentile = Math.round(this.percentile(this.xNums, xAdd));
+
   }
 
   resetGraphData() {
@@ -249,6 +256,10 @@ export class ChanceStepperComponent implements OnInit {
     return (Math.sqrt(diffSqredArr.reduce((firstEl, nextEl) => {
       return firstEl + nextEl;
     }) / tab.length));
+  }
+
+  percentile(arr, val){
+    return (100 * arr.reduce((acc, v) => acc + (v < val ? 1 : 0) + (v === val ? 0.5 : 0), 0)) / arr.length;
   }
 
 }
