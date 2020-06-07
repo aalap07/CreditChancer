@@ -29,6 +29,28 @@ export class ChanceStepperComponent implements OnInit {
   avgAgeMos: number;
   avgAgeYrs: number;
 
+  // Score
+  medianScore: number;
+  q1Score: number;
+  q3Score: number;
+  stDevScore: number;
+
+  // Acct age
+  medianAcctRaw: number;
+  q1AcctRaw: number;
+  q3AcctRaw: number;
+  stDevAcctRaw: number;
+
+  medianAcctYrs: number;
+  q1AcctYrs: number;
+  q3AcctYrs: number;
+  stDevAcctYrs: number;
+  
+  medianAcctMos: number;
+  q1AcctMos: number;
+  q3AcctMos: number;
+  stDevAcctMos: number;
+  
   constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
     this.cardService.getCards().subscribe((cards) => {
       this.dbRecords = cards;
@@ -68,8 +90,12 @@ export class ChanceStepperComponent implements OnInit {
       },
       yaxis: {
         title: 'Credit Score',
-      }
+      },
     },
+    config: {
+      displayModeBar: false,
+    }
+    
   };
 
   fetchApiCards() {
@@ -108,10 +134,39 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "green" },
       },
     ];
+   this.calculateStatistics();
+
+  }
+
+  calculateStatistics(){
     this.avgScore = Math.round(this.Array_Average(this.yNums));
     this.avgAgeRaw = this.Array_Average(this.xNums);
     this.avgAgeYrs = Math.round(this.avgAgeRaw / 12);
     this.avgAgeMos = Math.round(this.avgAgeRaw % 12);
+
+    this.medianScore = Math.round(this.Quartile_50(this.yNums));
+    this.medianAcctRaw = Math.round(this.Quartile_50(this.xNums));
+
+    this.q1Score = Math.round(this.Quartile_25(this.yNums));
+    this.q1AcctRaw = Math.round(this.Quartile_25(this.xNums));
+    
+    this.q3Score = Math.round(this.Quartile_75(this.yNums));
+    this.q3AcctRaw = Math.round(this.Quartile_75(this.xNums));
+
+    this.stDevScore = Math.round(this.Array_Stdev(this.yNums));
+    this.stDevAcctRaw = Math.round(this.Array_Stdev(this.xNums));
+
+    this.medianAcctYrs = Math.round(this.medianAcctRaw / 12);
+    this.medianAcctMos = Math.round(this.medianAcctRaw % 12);
+
+    this.q1AcctYrs = Math.round(this.q1AcctRaw / 12);
+    this.q1AcctMos = Math.round(this.q1AcctRaw % 12);
+
+    this.q3AcctYrs = Math.round(this.q3AcctRaw / 12);
+    this.q3AcctMos = Math.round(this.q3AcctRaw % 12);
+
+    this.stDevAcctYrs = Math.round(this.stDevAcctRaw / 12);
+    this.stDevAcctMos = Math.round(this.stDevAcctRaw % 12);
   }
 
   private addUserPoint(xAdd: number, yAdd: number) {
