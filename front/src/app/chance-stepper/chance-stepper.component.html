@@ -18,19 +18,20 @@
             <h5>Results for {{chanceSearch}}</h5>
 
             <mat-form-field appearance="outline">
-            <table>
-                <tbody>
-                    <tr *ngFor="let apicard of apiCards | nonzeroEntry: apiCards" >
-                <mat-radio-group formControlName="selectedEntry" [(ngModel)]="selectedCard"
-                    [ngModelOptions]="{standalone: true}">
-                  <mat-radio-button [value]="apicard">{{apicard}}</mat-radio-button>
-                </mat-radio-group>
-                </tr>
-            </tbody>
-            </table>
+                <table>
+                    <tbody>
+                        <tr *ngFor="let apicard of apiCards | nonzeroEntry: apiCards">
+                            <mat-radio-group formControlName="selectedEntry" [(ngModel)]="selectedCard"
+                                [ngModelOptions]="{standalone: true}">
+                                <mat-radio-button [value]="apicard">{{apicard}}</mat-radio-button>
+                            </mat-radio-group>
+                        </tr>
+                    </tbody>
+                </table>
             </mat-form-field>
             <div>
-                <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Back</button>
+                <button style="margin:1%" class="btn btn-outline-dark"
+                    (click)="stepper.reset(); resetGraphData()">Back</button>
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -40,7 +41,8 @@
             <ng-template matStepLabel>Enter your basic info</ng-template>
             <mat-form-field appearance="outline">
                 <mat-label>Credit Score</mat-label>
-                <input type="tel" min="300" max="850" style="margin:1%" matInput formControlName="scoreCtrl" placeholder="300-850" required>
+                <input type="tel" min="300" max="850" style="margin:1%" matInput formControlName="scoreCtrl"
+                    placeholder="300-850" required>
             </mat-form-field>
             <br>
             <mat-form-field appearance="outline">
@@ -53,8 +55,9 @@
                 <input type="number" style="margin:1%" matInput formControlName="moCtrl" placeholder="<= 11" required>
             </mat-form-field>
             <div>
-                <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Start over</button>
-                <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
+                <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Start
+                    over</button>
+                <button class="btn btn-outline-dark" mat-button matStepperNext>Get results!</button>
             </div>
         </form>
     </mat-step>
@@ -64,33 +67,34 @@
             <plotly-plot [data]="graph.data" [layout]="graph.layout" [config]="graph.config">
             </plotly-plot>
             <div style="text-align: center;">
-            <h4>Approval statistics from our database</h4>
-            <h5>Where you stand</h5>
-            <p>
-                Your credit score percentile is {{userScorePercentile}}. <br>
-                Your account ownership length percentile is {{userLengthPercentile}}.
-            </p>
+                <h4>Approval statistics from our database</h4>
+                <h5>Where you stand</h5>
+                <p>
+                    Your credit score percentile is <b>{{userScorePercentile}}.</b> <br>
+                    Your account ownership length percentile is <b>{{userLengthPercentile}}</b>.
+                </p>
 
-            <h5>Credit Score</h5>
-            <p>Average: <b>{{avgScore}}</b>
-                <br>
-                25th percentile (1st quartile): <b>{{q1Score}}</b><br>
-                Median: <b>{{medianScore}}</b> <br>
-                75th percentile (3rd quartile): <b>{{q3Score}}</b><br>
-                <br>
-            </p>
-            <h5>Oldest Account Age</h5>
-            <p>
-                Average: <b>{{avgAgeYrs}} years and {{avgAgeMos}} months</b>
-                <br>
-                
-                25th percentile (1st quartile): <b>{{q1AcctYrs}} years and {{q1AcctMos}} months</b><br>
-                Median: <b>{{medianAcctYrs}} years and {{medianAcctMos}} months</b> <br>
-                75th percentile (3rd quartile): <b>{{q3AcctYrs}} years and {{q3AcctMos}} months</b><br>
-            </p>
-            
-        </div>
-            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetGraphData()">Start over</button>
+                <h5>Credit Scores</h5>
+                <p>Average: <b>{{avgScore}}</b>
+                    <br>
+                    25th percentile (1st quartile): <b>{{q1Score}}</b><br>
+                    Median: <b>{{medianScore}}</b> <br>
+                    75th percentile (3rd quartile): <b>{{q3Score}}</b><br>
+                    <br>
+                </p>
+                <h5>Oldest Account Ages</h5>
+                <p>
+                    Average: <b>{{avgAgeYrs}} years and {{avgAgeMos}} months</b>
+                    <br>
+
+                    25th percentile (1st quartile): <b>{{q1AcctYrs}} years and {{q1AcctMos}} months</b><br>
+                    Median: <b>{{medianAcctYrs}} years and {{medianAcctMos}} months</b> <br>
+                    75th percentile (3rd quartile): <b>{{q3AcctYrs}} years and {{q3AcctMos}} months</b><br>
+                </p>
+
+            </div>
+            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetGraphData()">Start
+                over</button>
         </div>
     </mat-step>
 </mat-horizontal-stepper>

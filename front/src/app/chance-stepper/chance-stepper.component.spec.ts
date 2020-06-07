@@ -8,9 +8,9 @@ describe('ChanceStepperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChanceStepperComponent ]
+      declarations: [ChanceStepperComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -22,13 +22,14 @@ export class CardService {
     return this.http.post('http://localhost:3000/api/new', newCard, { headers: headers })
       .map(res => {
         alert(res.json().msg)
+        window.location.reload();
       }
       );
   }
 
-  getApiCards(query){
-    return this.http.get(`https://api.ccstack.io/v1/search/cards?api_key=CCSTACK_API_KEY&query=${query}`)
-      .map(res=>res.json());
+  getApiCards(query) {
+    return this.http.get(`https://api.ccstack.io/v1/search/cards?api_key=CC&query=${query}`)
+      .map(res => res.json());
   }
 
 }

@@ -2,96 +2,97 @@
 <html>
 
 <head>
-    <meta charset = "UTF-8" />
-    <title>CreditChancer</title>
-    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:500" rel="stylesheet" />
-    <link rel="stylesheet" href="/cards.component.css" />
-    
+  <meta charset="UTF-8" />
+  <title>CreditChancer</title>
+  <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:500" rel="stylesheet" />
+  <link rel="stylesheet" href="/cards.component.css" />
+
 </head>
 
 <body style="background-image: url(../../assets/home_bg.svg);">
-    <div>
-        <main>
-            <section class="hero">
-                <div class="container">
-                    <div class="hero-inner">
-                        <div class="hero-copy">
-                            <h1 class="hero-title mt-0">Welcome to CreditChancer</h1>
-                            <p class="hero-paragraph">
-                                Learn your odds of getting approved for any credit card in
-                                under a minute
-                            </p>
-                            <div class="hero-cta">
-                                <button class="button button-primary" (click)="scrollToElement(records)">Get started</button>
-                                <button class="button button-secondary" (click)="scrollToElement(contribute)">Contribute</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <hr>
-            <div #records class="container">
-                <h2>View approval data</h2>
-                <div class="row">
-                    <div class="col-md">
-                        <input class="form-control" type="text" [(ngModel)]="term" placeholder="Find a card"
-                            aria-label="Search" />
-                    </div>
-                </div>
+  <div>
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <h1 class="hero-title mt-0">Welcome to CreditChancer</h1>
+              <p class="hero-paragraph">
+                Learn your odds of getting approved for any credit card in
+                under a minute
+              </p>
+              <div class="hero-cta">
+                <button class="button button-primary" (click)="scrollToElement(records)">Get started</button>
+                <button class="button button-secondary" (click)="scrollToElement(contribute)">Contribute</button>
+              </div>
             </div>
-            <div class="container">
-                <div>
-                    <br /><br />
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Card</th>
-                                <th scope="col">Credit Score</th>
-                                <th scope="col">Oldest Account Age (Yrs)</th>
-                                <th scope="col">Oldest Account Age (Mos)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let card of cards | filter: term | slice: (approvedPage * pageSize) - pageSize :approvedPage * pageSize">
-                                <th scope="row">{{ card.name }}</th>
-                                <td>{{ card.creditScore }}</td>
-                                <td>{{ card.acctAgeYrs }}</td>
-                                <td>{{ card.acctAgeMos }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="text-align: center;">
-                        <button style="margin:1%" class="btn btn-primary" [disabled] ="approvedPage == 1" (click)="approvedPage = approvedPage - 1"><</button>
-                        <span>Page {{approvedPage}} of {{ numApprovedPages() }}</span>
-                        <button style="margin:1%" class="btn btn-primary" [disabled] = "approvedPage >= cards.length/pageSize" 
-                                 (click) ="approvedPage = approvedPage + 1">></button>
-                </div>
-                </div>
-            </div>
-            <div class="container">
-                <h2>Chance me</h2>
-                <h4>NOTE: This tool only works for cards in our system which have reported data points.</h4>
-                <app-chance-stepper></app-chance-stepper>
-            </div>
-            <div #contribute class="container">
-            <app-contribute></app-contribute>
-            </div>
-            <div class="container-sm">
-                <div class="cta-inner section-inner"></div>
-            </div>
-        </main>
-        <footer class="site-footer has-top-divider">
-            <div class="container">
-                <div class="site-footer-inner">
-                    <div class="footer-copyright">
-                        &copy; 2020 Aalap Patel. All rights reserved. This app is for
-                        informational purposes only and has no affiliation with any
-                        financial institutions or credit bureaus.
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+          </div>
+        </div>
+      </section>
+      <hr>
+      <div #records class="container">
+        <h2>View all approval data</h2>
+        <div class="row">
+          <div class="col-md">
+            <input class="form-control" type="text" [(ngModel)]="term" placeholder="Find a card" aria-label="Search" />
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div>
+          <br /><br />
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Card</th>
+                <th scope="col">Credit Score</th>
+                <th scope="col">Oldest Account Age (Yrs)</th>
+                <th scope="col">Oldest Account Age (Mos)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let card of cards | filter: term | slice: (approvedPage * pageSize) - pageSize :approvedPage * pageSize">
+                <th scope="row">{{ card.name }}</th>
+                <td>{{ card.creditScore }}</td>
+                <td>{{ card.acctAgeYrs }}</td>
+                <td>{{ card.acctAgeMos }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="text-align: center;">
+            <button style="margin:1%" class="btn btn-primary" [disabled]="approvedPage == 1"
+              (click)="approvedPage = approvedPage - 1">
+              <</button> <span>Page {{approvedPage}} of {{ numApprovedPages() }}</span>
+                <button style="margin:1%" class="btn btn-primary" [disabled]="approvedPage >= cards.length/pageSize"
+                  (click)="approvedPage = approvedPage + 1">></button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Chance me</h2>
+        <h4>NOTE: This tool only works for cards in our system which have reported data points.</h4>
+        <app-chance-stepper></app-chance-stepper>
+      </div>
+      <div #contribute class="container">
+        <app-contribute></app-contribute>
+      </div>
+      <div class="container-sm">
+        <div class="cta-inner section-inner"></div>
+      </div>
+    </main>
+    <footer class="site-footer has-top-divider">
+      <div class="container">
+        <div class="site-footer-inner">
+          <div class="footer-copyright">
+            &copy; 2020 Aalap Patel. All rights reserved. This app is for
+            informational purposes only and has no affiliation with any
+            financial institutions or credit bureaus.
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
 </body>
 
 </html>

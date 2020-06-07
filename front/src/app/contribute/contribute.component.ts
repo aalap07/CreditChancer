@@ -40,7 +40,7 @@ export class ContributeComponent implements OnInit {
     return pages == 0 ? 1 : pages;
   }
 
-  addCard(cardName, creditScore, acctAgeYrs, acctAgeMos){
+  addCard(cardName, creditScore, acctAgeYrs, acctAgeMos) {
     return this.cardsComp.addCard(cardName, creditScore, acctAgeYrs, acctAgeMos);
   }
 }

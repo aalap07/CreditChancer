@@ -13,9 +13,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
 import { ContributeComponent } from './contribute/contribute.component';
-import {MatStepperModule, MatStep} from '@angular/material/stepper';
+import { MatStepperModule, MatStep } from '@angular/material/stepper';
 import { ChanceStepperComponent } from './chance-stepper/chance-stepper.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { NonzeroEntryPipe } from './nonzero-entry.pipe';
 
 PlotlyModule.plotlyjs = PlotlyJS;
@@ -38,7 +38,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
   ],
   providers: [],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class AppModule { }

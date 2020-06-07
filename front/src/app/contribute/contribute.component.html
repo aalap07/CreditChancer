@@ -1,51 +1,54 @@
-                <h2>Add a data point</h2>
-                <div class="row">
-                    <div class="col-md-8">
-                        <input class="form-control" type="text" [(ngModel)]="apisearch" placeholder="Search for a card to add"
-                            aria-label="Search" required />
-                    </div>
-                    <div class="col-md-3">
-                        <form (submit)="fetchApiCards()">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
-                </div>
-                <br>
-                <div>
-                    <table class="table">
-                        <tbody>
-                            <tr *ngFor="let apicard of apiCards | slice: (addCardPage * pageSize) - pageSize :addCardPage * pageSize">
-                                <mat-expansion-panel>
-                                    <mat-expansion-panel-header>
-                                        <label id="name">{{ apicard }}</label>
-                                    </mat-expansion-panel-header>
-                                    <form (submit)="addCard(apicard, creditScore, acctAgeYrs, acctAgeMos)">
-                                        <div class="form-group">
-                                            <label>Credit Score</label>
-                                            <input type="text" [(ngModel)]="creditScore" name="creditScore"
-                                                class="form-control" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Age of Oldest Account in Years</label>
-                                            <input type="text" [(ngModel)]="acctAgeYrs" name="acctAgeYrs"
-                                                class="form-control" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Age of Oldest Account in Months</label>
-                                            <input type="text" [(ngModel)]="acctAgeMos" name="acctAgeMos"
-                                                class="form-control" required />
-                                        </div>
-                                        <input style="margin:1%" type="submit" class="btn btn-primary" />
-                                        <input type="reset" class="btn btn-dark" value="Clear"/>
-                                    </form>
-                                </mat-expansion-panel>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div style="text-align: center;">
-                        <button style="margin:1%" class="btn btn-primary" [disabled] ="addCardPage == 1" (click)="addCardPage = addCardPage - 1"><</button>
-                        <span>Page {{addCardPage}} of {{ numAddCardPages() }}</span>
-                        <button style="margin:1%" class="btn btn-primary" [disabled] = "addCardPage >= apiCards.length/pageSize" 
-                                 (click) ="addCardPage = addCardPage + 1">></button>
-                </div>
-                </div>
+<h2>Add a data point</h2>
+<div class="row">
+  <div class="col-md-8">
+    <input class="form-control" type="text" [(ngModel)]="apisearch" placeholder="Search for a card to add"
+      aria-label="Search" required />
+  </div>
+  <div class="col-md-3">
+    <form (submit)="fetchApiCards()">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+</div>
+<br />
+<div>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="
+          let apicard of apiCards
+            | slice: addCardPage * pageSize - pageSize:addCardPage * pageSize
+        ">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <label id="name">{{ apicard }}</label>
+          </mat-expansion-panel-header>
+          <form (submit)="addCard(apicard, creditScore, acctAgeYrs, acctAgeMos)">
+            <div class="form-group">
+              <label>Credit Score</label>
+              <input type="text" [(ngModel)]="creditScore" name="creditScore" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Age of Oldest Account in Years</label>
+              <input type="text" [(ngModel)]="acctAgeYrs" name="acctAgeYrs" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label>Age of Oldest Account in Months</label>
+              <input type="text" [(ngModel)]="acctAgeMos" name="acctAgeMos" class="form-control" required />
+            </div>
+            <input style="margin: 1%;" type="submit" class="btn btn-primary" />
+            <input type="reset" class="btn btn-dark" value="Clear" />
+          </form>
+        </mat-expansion-panel>
+      </tr>
+    </tbody>
+  </table>
+  <div style="text-align: center;">
+    <button style="margin: 1%;" class="btn btn-primary" [disabled]="addCardPage == 1"
+      (click)="addCardPage = addCardPage - 1">
+      < </button> <span>Page {{ addCardPage }} of {{ numAddCardPages() }}</span>
+        <button style="margin: 1%;" class="btn btn-primary" [disabled]="addCardPage >= apiCards.length / pageSize"
+          (click)="addCardPage = addCardPage + 1">
+          >
+        </button>
+  </div>
+</div>

@@ -1262,8 +1262,7 @@ button, input, select, textarea, label {
     height: 324px;
 }
 
-.lights-off .site-header::before {
-}
+.lights-off .site-header::before {}
 
 .site-header-inner {
     position: relative;
@@ -1314,7 +1313,7 @@ button, input, select, textarea, label {
 
 .hero-paragraph {
     margin-bottom: 32px;
-    margin-top:15%; 
+    margin-top: 15%;
     color: black;
 }
 
@@ -1566,8 +1565,7 @@ button, input, select, textarea, label {
     background-image: url(../../assets/home_bg.svg);
 }
 
-.lights-off .cta::before {
-}
+.lights-off .cta::before {}
 
 .cta-cta {
     max-width: 400px;
@@ -1941,4 +1939,3 @@ body, a, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     animation: fadeIn 1s 0.2s both cubic-bezier(0.3, 0, 0.2, 1);
     will-change: transform
 }
-

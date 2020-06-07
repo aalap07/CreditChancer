@@ -23,7 +23,6 @@ router.post("/api/new", (req, res, next) => {
       res.json({ msg: "Could not add card." });
     } else {
       res.json({ msg: "Card added. Thanks for contributing!" });
-      window.location.reload();
     }
   });
 });

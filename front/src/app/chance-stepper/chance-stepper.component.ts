@@ -45,12 +45,12 @@ export class ChanceStepperComponent implements OnInit {
   q1AcctYrs: number;
   q3AcctYrs: number;
   stDevAcctYrs: number;
-  
+
   medianAcctMos: number;
   q1AcctMos: number;
   q3AcctMos: number;
   stDevAcctMos: number;
-  
+
   userScorePercentile: number;
   userLengthPercentile: number;
 
@@ -98,7 +98,7 @@ export class ChanceStepperComponent implements OnInit {
     config: {
       displayModeBar: false,
     }
-    
+
   };
 
   fetchApiCards() {
@@ -137,11 +137,11 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "green" },
       },
     ];
-   this.calculateStatistics();
+    this.calculateStatistics();
 
   }
 
-  calculateStatistics(){
+  calculateStatistics() {
     this.avgScore = Math.round(this.Array_Average(this.yNums));
     this.avgAgeRaw = this.Array_Average(this.xNums);
     this.avgAgeYrs = Math.round(this.avgAgeRaw / 12);
@@ -152,7 +152,7 @@ export class ChanceStepperComponent implements OnInit {
 
     this.q1Score = Math.round(this.Quartile_25(this.yNums));
     this.q1AcctRaw = Math.round(this.Quartile_25(this.xNums));
-    
+
     this.q3Score = Math.round(this.Quartile_75(this.yNums));
     this.q3AcctRaw = Math.round(this.Quartile_75(this.xNums));
 
@@ -258,7 +258,7 @@ export class ChanceStepperComponent implements OnInit {
     }) / tab.length));
   }
 
-  percentile(arr, val){
+  percentile(arr, val) {
     return (100 * arr.reduce((acc, v) => acc + (v < val ? 1 : 0) + (v === val ? 0.5 : 0), 0)) / arr.length;
   }
 
