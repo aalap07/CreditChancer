@@ -30,7 +30,7 @@
             </table>
             </mat-form-field>
             <div>
-                <button class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Back</button>
+                <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Back</button>
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -53,6 +53,7 @@
                 <input type="number" style="margin:1%" matInput formControlName="moCtrl" placeholder="<= 11" required>
             </mat-form-field>
             <div>
+                <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Start over</button>
                 <button class="btn btn-outline-dark" mat-button matStepperNext>Next</button>
             </div>
         </form>
@@ -62,7 +63,16 @@
         <div>
             <plotly-plot [data]="graph.data" [layout]="graph.layout">
             </plotly-plot>
-            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetGraphData()">Reset</button>
+            <div style="text-align: center;">
+            <h4>Approval statistics from our database</h4>
+            <p>Average credit score: {{avgScore}}
+                <br>
+                Average oldest account age: {{avgAgeYrs}} years and {{avgAgeMos}} months
+                <br>
+               
+            </p>
+        </div>
+            <button class="btn btn-outline-dark" mat-button (click)="stepper.reset(); resetGraphData()">Start over</button>
         </div>
     </mat-step>
 </mat-horizontal-stepper>

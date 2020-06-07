@@ -24,6 +24,11 @@ export class ChanceStepperComponent implements OnInit {
   xNums: number[]; // length of account
   yNums: number[]; // credit score
 
+  avgScore: number;
+  avgAgeRaw: number;
+  avgAgeMos: number;
+  avgAgeYrs: number;
+
   constructor(private _formBuilder: FormBuilder, private cardService: CardService) {
     this.cardService.getCards().subscribe((cards) => {
       this.dbRecords = cards;
@@ -56,7 +61,7 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "red" },
       },
     ],
-    layout: { 
+    layout: {
       title: "Chances",
       xaxis: {
         title: 'Oldest Account Age (Total months)',
@@ -89,11 +94,9 @@ export class ChanceStepperComponent implements OnInit {
     this.migrateDataPoints();
   }
 
-
   sendUserData() {
     return this.addUserPoint(this.userDataGroup.get('yrCtrl').value * 12 + this.userDataGroup.get('moCtrl').value, Number(this.userDataGroup.get('scoreCtrl').value));
   }
-
 
   migrateDataPoints() {
     this.graph.data = [
@@ -105,6 +108,10 @@ export class ChanceStepperComponent implements OnInit {
         marker: { size: 20, color: "green" },
       },
     ];
+    this.avgScore = Math.round(this.Array_Average(this.yNums));
+    this.avgAgeRaw = this.Array_Average(this.xNums);
+    this.avgAgeYrs = Math.round(this.avgAgeRaw / 12);
+    this.avgAgeMos = Math.round(this.avgAgeRaw % 12);
   }
 
   private addUserPoint(xAdd: number, yAdd: number) {
@@ -132,5 +139,62 @@ export class ChanceStepperComponent implements OnInit {
       },
     ];
   }
+
+  Median(data) {
+    return this.Quartile_50(data);
+  }
+
+  Quartile_25(data) {
+    return this.Quartile(data, 0.25);
+  }
+
+  Quartile_50(data) {
+    return this.Quartile(data, 0.5);
+  }
+
+  Quartile_75(data) {
+    return this.Quartile(data, 0.75);
+  }
+
+  Quartile(data, q) {
+    data = this.Array_Sort_Numbers(data);
+    var pos = ((data.length) - 1) * q;
+    var base = Math.floor(pos);
+    var rest = pos - base;
+    if ((data[base + 1] !== undefined)) {
+      return data[base] + rest * (data[base + 1] - data[base]);
+    } else {
+      return data[base];
+    }
+  }
+
+  Array_Sort_Numbers(inputarray) {
+    return inputarray.sort((a, b) => {
+      return a - b;
+    });
+  }
+
+  Array_Sum(t) {
+    return t.reduce((a, b) => { return a + b; }, 0);
+  }
+
+  Array_Average(data) {
+    return this.Array_Sum(data) / data.length;
+  }
+
+  Array_Stdev(tab) {
+    var i, j, total = 0, mean = 0, diffSqredArr = [];
+    for (i = 0; i < tab.length; i += 1) {
+      total += tab[i];
+    }
+    mean = total / tab.length;
+    for (j = 0; j < tab.length; j += 1) {
+      diffSqredArr.push(Math.pow((tab[j] - mean), 2));
+    }
+    return (Math.sqrt(diffSqredArr.reduce((firstEl, nextEl) => {
+      return firstEl + nextEl;
+    }) / tab.length));
+  }
+
 }
 
