@@ -1,6 +1,6 @@
 <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="cardGroup" [editable]="isEditable">
-        <form [formGroup]="cardGroup" (submit)="fetchApiCards()">
+        <form ngNativeValidate [formGroup]="cardGroup" (submit)="fetchApiCards()">
             <ng-template matStepLabel>Search for a card</ng-template>
             <mat-form-field appearance="outline">
                 <mat-label>Card Name or Issuer</mat-label>
@@ -13,7 +13,7 @@
         </form>
     </mat-step>
     <mat-step [stepControl]="selectorGroup" [editable]="isEditable">
-        <form (submit)="createDataArray()" [formGroup]="selectorGroup">
+        <form ngNativeValidate (submit)="createDataArray()" [formGroup]="selectorGroup">
             <ng-template matStepLabel>Select entry</ng-template>
             <h5>Results for {{chanceSearch}}</h5>
 
@@ -22,7 +22,7 @@
                     <tbody>
                         <tr *ngFor="let apicard of apiCards | nonzeroEntry: apiCards">
                             <mat-radio-group formControlName="selectedEntry" [(ngModel)]="selectedCard"
-                                [ngModelOptions]="{standalone: true}">
+                                [ngModelOptions]="{standalone: true}" required>
                                 <mat-radio-button [value]="apicard">{{apicard}}</mat-radio-button>
                             </mat-radio-group>
                         </tr>
@@ -37,7 +37,7 @@
         </form>
     </mat-step>
     <mat-step [stepControl]="userDataGroup" [editable]="isEditable">
-        <form (submit)="sendUserData()" [formGroup]="userDataGroup">
+        <form ngNativeValidate (submit)="sendUserData()" [formGroup]="userDataGroup">
             <ng-template matStepLabel>Enter your basic info</ng-template>
             <mat-form-field appearance="outline">
                 <mat-label>Credit Score</mat-label>
@@ -57,7 +57,7 @@
             <div>
                 <button style="margin:1%" class="btn btn-outline-dark" (click)="stepper.reset(); resetGraphData()">Start
                     over</button>
-                <button class="btn btn-outline-dark" mat-button matStepperNext>Get results!</button>
+                <button type="submit" class="btn btn-outline-dark" mat-button matStepperNext>Get results!</button>
             </div>
         </form>
     </mat-step>
