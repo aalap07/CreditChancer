@@ -34,7 +34,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlotlyModule,
     MatStepperModule,
     ReactiveFormsModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CardService } from "../card.service";
 import { Card } from "../card";
 import { NonzeroEntryPipe } from '../nonzero-entry.pipe';
-
+import { NumValidatorService } from '../num-validator.service';
 
 @Component({
   selector: 'app-chance-stepper',
@@ -70,9 +70,9 @@ export class ChanceStepperComponent implements OnInit {
       selectedEntry: ['', Validators.required]
     });
     this.userDataGroup = this._formBuilder.group({
-      scoreCtrl: ['', Validators.required],
-      yrCtrl: ['', Validators.required],
-      moCtrl: ['', Validators.required]
+      scoreCtrl: [, [Validators.required, NumValidatorService.max(850), NumValidatorService.min(300)]],
+      yrCtrl: [, [Validators.required, NumValidatorService.min(0)]],
+      moCtrl: [, [Validators.required, NumValidatorService.max(11), NumValidatorService.min(0)]]
     });
   }
 
@@ -187,6 +187,7 @@ export class ChanceStepperComponent implements OnInit {
     this.userLengthPercentile = Math.round(this.percentile(this.xNums, xAdd));
 
   }
+
 
   resetGraphData() {
     this.xNums = [];
